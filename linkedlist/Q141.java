@@ -12,4 +12,3 @@ public class Q141 {
         return fast != null && fast.next != null;
     }
 }
-141. Linked List Cycle141. Linked List Cycle
