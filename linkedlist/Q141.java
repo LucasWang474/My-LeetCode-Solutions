@@ -7,8 +7,8 @@ public class Q141 {
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-            if (slow == fast) break;
+            if (slow == fast) return true;
         }
-        return fast != null && fast.next != null;
+        return false;
     }
 }
