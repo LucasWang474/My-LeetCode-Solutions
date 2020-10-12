@@ -4,7 +4,6 @@
 public class Q21 {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(0), ptr = dummy;
-
         while (l1 != null && l2 != null) {
             if (l1.val <= l2.val) {
                 ptr.next = l1;
@@ -16,7 +15,6 @@ public class Q21 {
             ptr = ptr.next;
         }
         ptr.next = (l1 != null) ? l1 : l2;
-
         return dummy.next;
     }
 }

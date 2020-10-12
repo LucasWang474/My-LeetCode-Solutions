@@ -5,17 +5,14 @@ public class Q83 {
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null || head.next == null) return head;
 
-        ListNode dummy = new ListNode(head.val - 1, head), ptr = dummy;
-        int prev = dummy.val;
+        ListNode ptr = head;
         while (ptr.next != null) {
-            if (ptr.next.val == prev) {
+            if (ptr.val == ptr.next.val) {
                 ptr.next = ptr.next.next;
             } else {
-                prev = ptr.next.val;
                 ptr = ptr.next;
             }
         }
-
-        return dummy.next;
+        return head;
     }
 }
