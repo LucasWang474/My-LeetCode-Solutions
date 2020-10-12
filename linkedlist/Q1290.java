@@ -4,9 +4,9 @@
 public class Q1290 {
     public int getDecimalValue(ListNode head) {
         int result = 0;
-        for(ListNode ptr = head; ptr != null; ptr = ptr.next) {
-            result <<= 1;
-            result += ptr.val;
+        while (head != null) {
+            result = (result << 1) | head.val;
+            head = head.next;
         }
         return result;
     }
