@@ -49,17 +49,16 @@ public class Q138 {
         }
         return oldToNew.get(head);
     }
-}
 
+    private static class Node {
+        int val;
+        Node next;
+        Node random;
 
-class Node {
-    int val;
-    Node next;
-    Node random;
-
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
+        Node(int val) {
+            this.val = val;
+            this.next = null;
+            this.random = null;
+        }
     }
 }
