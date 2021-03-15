@@ -1,7 +1,4 @@
 # Definition for a Node.
-from typing import Tuple
-
-
 class Node:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -9,19 +6,43 @@ class Node:
         self.right = right
 
 
-class Solution:
+class Solution2:
+    def treeToDoublyList(self, root: 'Node') -> 'Node':
+        def dfs(cur_root: 'Node'):
+            if not cur_root:
+                return None
+
+            dfs(cur_root.left)
+
+            if self.tail:
+                self.tail.right, cur_root.left = cur_root, self.tail
+            else:
+                self.head = cur_root
+            self.tail = cur_root
+
+            dfs(cur_root.right)
+
+        if not root:
+            return None
+
+        self.head = self.tail = None
+        dfs(root)
+        self.head.left, self.tail.right = self.tail, self.head
+        return self.head
+
+
+class Solution1:
     # https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/
     def treeToDoublyList(self, root: 'Node') -> 'Node':
         if not root:
             return None
 
         head, tail = self.flatten(root)
-        head.left = tail
-        tail.right = head
+        head.left, tail.right = tail, head
         return head
 
     def flatten(self, root: 'Node'):
-        """ 
+        """
         Accept root, return head and tail of the flattened tree
         """
         if not root:
@@ -38,6 +59,7 @@ class Solution:
 
         return head, tail
 
+
 sample = Node(4, Node(2, Node(1), Node(3)), Node(5))
-result = Solution().treeToDoublyList(sample)
+result = Solution1().treeToDoublyList(sample)
 print(result)
