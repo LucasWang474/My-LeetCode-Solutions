@@ -26,9 +26,9 @@ class Solution:
         # 2. repace next and random
         ptr = head
         while ptr:
-            if oldToNew[ptr].next:
+            if ptr.next:
                 oldToNew[ptr].next = oldToNew[oldToNew[ptr].next]
-            if oldToNew[ptr].random:
+            if ptr.random:
                 oldToNew[ptr].random = oldToNew[oldToNew[ptr].random]
             ptr = ptr.next
 
