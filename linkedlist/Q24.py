@@ -13,9 +13,8 @@ class Solution:
         while ptr.next and ptr.next.next:
             first = ptr.next
             second = first.next
-            nextPtr = second.next
 
-            first.next = nextPtr
+            first.next = second.next
             second.next = first
             ptr.next = second
             ptr = first
