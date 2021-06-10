@@ -10,26 +10,23 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
-        # Use hash table, two pass
-
+        # Hash table
         if not head:
             return None
 
         oldToNew = dict()
 
-        # 1. shadow copy
         ptr = head
         while ptr:
-            oldToNew[ptr] = Node(ptr.val, ptr.next, ptr.random)
+            oldToNew[ptr] = Node(ptr.val)
             ptr = ptr.next
 
-        # 2. repace next and random
         ptr = head
         while ptr:
             if ptr.next:
-                oldToNew[ptr].next = oldToNew[oldToNew[ptr].next]
+                oldToNew[ptr].next = oldToNew[ptr.next]
             if ptr.random:
-                oldToNew[ptr].random = oldToNew[oldToNew[ptr].random]
+                oldToNew[ptr].random = oldToNew[ptr.random]
             ptr = ptr.next
 
         return oldToNew[head]
