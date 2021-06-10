@@ -15,27 +15,25 @@ class Solution:
         """
         # recursive
         self.flatten_helper(root)
-        return root
 
     def flatten_helper(self, root: TreeNode) -> TreeNode:
         if not root:
             return None
 
         leftRoot = root.left
-        leftTail = self.flatten_helper(root.left)
+        leftTail = self.flatten_helper(leftRoot)
         rightRoot = root.right
-        rightTail = self.flatten_helper(root.right)
+        rightTail = self.flatten_helper(rightRoot)
 
-        if leftRoot:
+        if leftTail:
+            leftTail.right = rightRoot
             root.left = None
             root.right = leftRoot
             root = leftTail
-        if rightRoot:
-            root.right = rightRoot
-            root = rightTail
-        return root
 
-    def flatten(self, root: TreeNode) -> None:
+        return rightTail if rightTail else root
+
+    def flatten(self, root: TreeNode) -> None: 
         """
         Do not return anything, modify root in-place instead.
         """
