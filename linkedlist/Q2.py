@@ -9,19 +9,19 @@ class ListNode:
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        ptr = dummy = ListNode()
+        ptr = dummy = ListNode(0)
         carry = 0
-        while l1 or l2 or carry:
-            sum = carry
+        while l1 or l2 or carry > 0:
+            total = carry
             if l1:
-                sum += l1.val
+                total += l1.val
                 l1 = l1.next
             if l2:
-                sum += l2.val
+                total += l2.val
                 l2 = l2.next
 
-            carry = sum // 10
-            sum %= 10
-            ptr.next = ListNode(sum)
+            carry = total // 10
+            ptr.next = ListNode(total % 10)
             ptr = ptr.next
         return dummy.next
+
