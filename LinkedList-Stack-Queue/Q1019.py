@@ -9,6 +9,7 @@ class ListNode:
 
 class Solution:
     def nextLargerNodes(self, head: ListNode):
+        # Brute force
         result = []
         while head:
             result.append(0)
@@ -21,3 +22,30 @@ class Solution:
                 next = next.next
             head = head.next
         return result
+
+    def nextLargerNodes(self, head: ListNode) -> list:
+        # Stack
+        vals = []
+        ptr = head
+        while ptr:
+            vals.append(ptr.val)
+            ptr = ptr.next
+
+        stack, res = [], [0] * len(vals)
+        for i in range(len(vals)):
+            while stack and vals[stack[-1]] < vals[i]:
+                res[stack.pop()] = vals[i]
+            stack.append(i)
+
+        return res
+
+    def nextLargerNodes(self, head: ListNode) -> list:
+        # Stack 2
+        stack, res = [], []
+        while head:
+            while stack and stack[-1][1] < head.val:
+                res[stack.pop()[0]] = head.val
+            stack.append([len(res), head.val])
+            res.append(0)
+            head = head.next
+        return res
