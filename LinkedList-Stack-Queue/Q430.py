@@ -24,12 +24,12 @@ class Solution:
             else:
                 return self.flatten_helper(head.next)
 
-        childRoot = head.child
-        childTail = self.flatten_helper(childRoot)
+        childHead = head.child
+        childTail = self.flatten_helper(childHead)
 
         oldNext = head.next
-        head.next = childRoot
-        childRoot.prev = head
+        head.next = childHead
+        childHead.prev = head
         head.child = None
 
         childTail.next = oldNext
@@ -38,3 +38,31 @@ class Solution:
             return self.flatten_helper(oldNext)
         else:
             return childTail
+
+    def flatten(self, head: 'Node') -> 'Node':
+        # Iterative
+        if not head:
+            return None
+
+        ptr = head
+        while ptr:
+            if not ptr.child:
+                ptr = ptr.next
+                continue
+
+            childHead = ptr.child
+            childTail = ptr.child
+            while childTail.next:
+                childTail = childTail.next
+
+            oldNext = ptr.next
+            ptr.next = childHead
+            childHead.prev = ptr
+            ptr.child = None
+
+            if oldNext:
+                childTail.next = oldNext
+                oldNext.prev = childTail
+
+            ptr = ptr.next
+        return head
