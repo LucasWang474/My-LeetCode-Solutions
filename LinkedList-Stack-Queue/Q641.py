@@ -101,8 +101,3 @@ class MyCircularDeque:
 # param_6 = obj.getRear()
 # param_7 = obj.isEmpty()
 # param_8 = obj.isFull()
-
-
-["MyCircularDeque", "insertLast", "insertLast", "insertFront", "insertFront",
-    "getRear", "isFull", "deleteLast", "insertFront", "getFront"]
-[[3], [1], [2], [3], [4], [], [], [], [4], []]
