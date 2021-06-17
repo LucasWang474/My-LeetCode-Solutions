@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/binary-tree-postorder-traversal/
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -34,4 +36,19 @@ class Solution:
                 stack.append((node, True))
                 stack.append((node.right, False))
                 stack.append((node.left, False))
+        return res
+
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        stack, res = [], []
+        while root or stack:
+            while root:
+                stack.append(root.val)
+                stack.append(root.right)
+                root = root.left
+
+            while stack and isinstance(stack[-1], int):
+                res.append(stack.pop())
+
+            if stack:
+                root = stack.pop()
         return res

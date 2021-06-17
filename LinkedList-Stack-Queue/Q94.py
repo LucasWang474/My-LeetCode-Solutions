@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/binary-tree-inorder-traversal
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -21,15 +23,14 @@ class Solution:
 
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         stack, res = [], []
-        ptr = root
-        while stack or ptr:
-            while ptr:
-                stack.append(ptr)
-                ptr = ptr.left
+        while root or stack:
+            while root:
+                stack.append(root.right)
+                stack.append(root.val)
+                root = root.left
 
-            ptr = stack.pop()
-            res.append(ptr.val)
-            ptr = ptr.right
+            res.append(stack.pop())
+            root = stack.pop()
         return res
 
     def inorderTraversal(self, root: TreeNode) -> List[int]:
