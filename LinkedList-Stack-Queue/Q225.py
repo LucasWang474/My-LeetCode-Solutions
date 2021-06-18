@@ -1,37 +1,41 @@
 # https://leetcode.com/problems/implement-stack-using-queues/
 
+from collections import deque
+
+
 class MyStack:
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.stack = []
+        self.q1 = deque()
 
     def push(self, x: int) -> None:
         """
         Push element x onto stack.
         """
-        self.stack.append(x)
+        self.q1.append(x)
+        for _ in range(len(self.q1) - 1):
+            self.q1.append(self.q1.popleft())
 
     def pop(self) -> int:
         """
         Removes the element on top of the stack and returns that element.
         """
-        return self.stack.pop()
+        return self.q1.popleft()
 
     def top(self) -> int:
         """
         Get the top element.
         """
-        return self.stack[-1]
+        return self.q1[0]
 
     def empty(self) -> bool:
         """
         Returns whether the stack is empty.
         """
-        return len(self.stack) == 0
-
+        return len(self.q1) == 0
 
 # Your MyStack object will be instantiated and called as such:
 # obj = MyStack()
