@@ -23,5 +23,3 @@ class Solution:
                 nums[k] = right[j]
                 j += 1
             k += 1
-
-    
