@@ -41,28 +41,20 @@ class Solution:
 
     def flatten(self, head: 'Node') -> 'Node':
         # Iterative
-        if not head:
-            return None
-
         ptr = head
         while ptr:
             if not ptr.child:
                 ptr = ptr.next
-                continue
+            else:
+                child_tail = ptr.child
+                while child_tail.next:
+                    child_tail = child_tail.next
 
-            childHead = ptr.child
-            childTail = ptr.child
-            while childTail.next:
-                childTail = childTail.next
+                if ptr.next:
+                    child_tail.next = ptr.next
+                    ptr.next.prev = child_tail
 
-            oldNext = ptr.next
-            ptr.next = childHead
-            childHead.prev = ptr
-            ptr.child = None
-
-            if oldNext:
-                childTail.next = oldNext
-                oldNext.prev = childTail
-
-            ptr = ptr.next
+                ptr.next = ptr.child
+                ptr.next.prev = ptr
+                ptr.child = None
         return head
