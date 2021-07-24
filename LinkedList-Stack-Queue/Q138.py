@@ -10,55 +10,27 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
-        # Hash table
         if not head:
             return None
 
-        oldToNew = dict()
-
         ptr = head
         while ptr:
-            oldToNew[ptr] = Node(ptr.val)
-            ptr = ptr.next
+            ptr.next = Node(ptr.val, ptr.next)
+            ptr = ptr.next.next
 
-        ptr = head
-        while ptr:
-            if ptr.next:
-                oldToNew[ptr].next = oldToNew[ptr.next]
-            if ptr.random:
-                oldToNew[ptr].random = oldToNew[ptr.random]
-            ptr = ptr.next
-
-        return oldToNew[head]
-
-    def copyRandomList(self, head: 'Node') -> 'Node':
-        # No extra space, no hash table
-
-        if not head:
-            return None
-
-        # 1. shadow copy
-        ptr = head
-        while ptr:
-            oldNext = ptr.next
-            copy = Node(ptr.val, oldNext)
-            ptr.next = copy
-            ptr = oldNext
-
-        # 2. copy actual random pointer
         ptr = head
         while ptr:
             if ptr.random:
                 ptr.next.random = ptr.random.next
             ptr = ptr.next.next
 
-        # 3. restore original list and construct new list
-        newHead = head.next
+        new_head = head.next
         ptr = head
         while ptr:
-            oldNext = ptr.next.next
-            newNext = ptr.next
-            newNext.next = oldNext.next if oldNext else None
-            ptr.next = oldNext
-            ptr = oldNext
-        return newHead
+            old_next = ptr.next.next
+            new_next = ptr.next
+
+            new_next.next = old_next.next if old_next else None
+            ptr.next = old_next
+            ptr = ptr.next
+        return new_head
