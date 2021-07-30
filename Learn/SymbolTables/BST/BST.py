@@ -37,3 +37,44 @@ class BST:
 
         return cur
 
+    def min(self):
+        ptr = self.root
+        while ptr:
+            if not ptr.left:
+                return ptr.key
+            else:
+                ptr = ptr.left
+
+    def max(self):
+        ptr = self.root
+        while ptr:
+            if not ptr.right:
+                return ptr.key
+            else:
+                ptr = ptr.right
+
+    def floor(self, key):
+        ptr = self.root
+        res = None
+        while ptr:
+            if ptr.key < key:
+                res = ptr.key
+                ptr = ptr.right
+            elif ptr.key > key:
+                ptr = ptr.left
+            else:
+                return ptr.key
+        return res
+
+    def ceil(self, key):
+        ptr = self.root
+        res = None
+        while ptr:
+            if ptr.key < key:
+                ptr = ptr.right
+            elif ptr.key > key:
+                res = ptr.key
+                ptr = ptr.left
+            else:
+                return ptr.key
+        return res
