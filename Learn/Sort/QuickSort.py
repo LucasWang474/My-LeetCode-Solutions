@@ -40,21 +40,39 @@ def sort_recur(arr, lo, hi):
     sort_recur(arr, j + 1, hi)
 
 
+# def partition(arr, lo, hi):
+#     i, j, pivot = lo, hi + 1, arr[lo]
+#     while True:
+#         i += 1
+#         while arr[i] < pivot and i < hi:
+#             i += 1
+#
+#         j -= 1
+#         while arr[j] > pivot:
+#             j -= 1
+#
+#         if j <= i:
+#             break
+#
+#         arr[i], arr[j] = arr[j], arr[i]
+#
+#     arr[lo], arr[j] = arr[j], arr[lo]
+#     return j
+
+
 def partition(arr, lo, hi):
-    i, j, pivot = lo, hi + 1, arr[lo]
+    pivot = arr[lo]
+    i, j = lo + 1, hi
     while True:
-        i += 1
-        while arr[i] < pivot and i < hi:
+        while i <= hi and arr[i] < pivot:
             i += 1
 
-        j -= 1
-        while arr[j] > pivot:
+        while j >= 0 and arr[j] > pivot:
             j -= 1
 
-        if j <= i:
+        if i >= j:
             break
 
         arr[i], arr[j] = arr[j], arr[i]
-
-    arr[lo], arr[j] = arr[j], arr[lo]
+    arr[j], arr[lo] = arr[lo], arr[j]
     return j
