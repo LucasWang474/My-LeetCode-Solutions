@@ -1,10 +1,26 @@
 /**
+ * https://leetcode.com/problems/sort-an-array/
  * @param {number[]} nums
  * @return {number[]}
  */
 var sortArray = function (nums) {
+    if (!nums || nums.length < 2) return nums;
 
+    quickSort(nums, 0, nums.length - 1);
+
+
+    return nums;
 };
+
+
+function quickSort(arr, lo, hi) {
+    if (lo >= hi) return;
+
+    let pivot = arr[Math.floor(Math.random() * (hi - lo + 1)) + lo];
+    let [lt, gt] = partition(arr, pivot, lo, hi);
+    quickSort(arr, lo, lt);
+    quickSort(arr, gt, hi);
+}
 
 
 function partition(arr, pivot, L, R) {

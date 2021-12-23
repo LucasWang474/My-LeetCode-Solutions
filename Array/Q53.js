@@ -4,10 +4,10 @@
  * @return {number}
  */
 var maxSubArray = function (nums) {
-    let maxSum = -Infinity, curSum = 0;
-    for (let num of nums) {
-        curSum += num;
-        if (curSum > maxSum) maxSum = curSum;
+    let maxSum = nums[0], curSum = 0;
+    for (let i = 0; i < nums.length; i++) {
+        curSum += nums[i];
+        maxSum = Math.max(maxSum, curSum);
         if (curSum < 0) curSum = 0;
     }
     return maxSum;
