@@ -1,25 +1,25 @@
 /**
+ * https://leetcode.com/problems/array-partition-i/
  * @param {number[]} nums
  * @return {number}
  */
 var arrayPairSum = function (nums) {
-    // Count sort
-    let maxNum = Math.max(...nums), minNum = Math.min(...nums);
-    let counts = new Array(maxNum - minNum + 1).fill(0);
+    // Counting Sort
+    const minNum = Math.min(...nums), maxNum = Math.max(...nums);
+    const counts = new Array(maxNum - minNum + 1).fill(0);
     for (let num of nums) counts[num - minNum]++;
 
-    let sum = 0, i = 0, N = nums.length, isLeft = true;
-    while (i < counts.length && N > 0) {
+    let sum = 0;
+    let isLeft = true, i = 0;
+    while (i < counts.length) {
         if (counts[i]) {
             if (isLeft) {
-                sum += Q234
-                i + minNum;
+                sum += (i + minNum);
                 isLeft = false;
             } else {
                 isLeft = true;
             }
             counts[i]--;
-            N--;
         } else {
             i++;
         }

@@ -15,8 +15,10 @@ var topKFrequent = function (nums, k) {
     for (let num in numToFreq) freqToNums[numToFreq[num]].push(num);
 
     let res = [];
-    for (let i = freqToNums.length - 1; i >= 0 && res.length < k; i--) {
-        res.push(...freqToNums[i]);
+    let i = freqToNums.length - 1;
+    while (i >= 0 && res.length < k) {
+        if (freqToNums[i].length > 0) res.push(freqToNums[i].pop());
+        else i--;
     }
     return res;
 };

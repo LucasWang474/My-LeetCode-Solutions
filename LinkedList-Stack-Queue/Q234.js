@@ -13,50 +13,49 @@ function ListNode(val, next) {
  * @return {boolean}
  */
 var isPalindrome = function (head) {
-    if (!head || !head.next) return true;
-
-    // Find the middle, left leaned
-    let dummy = new ListNode(0, head);
+    // Get the middle node, left leaned
+    const dummy = new ListNode(0, head);
     let slow = dummy, fast = dummy;
     while (fast && fast.next) {
         slow = slow.next;
         fast = fast.next.next;
     }
 
-    // Reverse the right part
-    let mid = slow;
-    let right = mid.next;
+    // Get right and truncate
+    const mid = slow;
+    const reversedRight = reverseList(mid.next);
     mid.next = null;
-    // Reverse
-    let reversedRight = null;
-    while (right) {
-        let next = right.next;
-        right.next = reversedRight;
-        reversedRight = right;
-        right = next;
-    }
 
-    // Compare
+    // Compare one by one
+    let isPalindrome = true;
     let ptr1 = head, ptr2 = reversedRight;
     while (ptr1 && ptr2) {
-        if (ptr1.val !== ptr2.val) return false;
+        if (ptr1.val !== ptr2.val) {
+            isPalindrome = false;
+            break;
+        }
         ptr1 = ptr1.next;
         ptr2 = ptr2.next;
     }
 
-    // Optional: restore the list
-    // Reverse right again
-    let originalRight = null;
-    while (reversedRight) {
-        let next = reversedRight.next;
-        reversedRight.next = originalRight;
-        originalRight = reversedRight;
-        reversedRight = next;
-    }
-    mid.next = originalRight;
+    // Restore the right
+    mid.next = reverseList(reversedRight);
 
-    return true;
+    return isPalindrome;
 };
+
+
+function reverseList(head) {
+    // Reverse right
+    let reversed = null;
+    while (head) {
+        let next = head.next;
+        head.next = reversed;
+        reversed = head;
+        head = next;
+    }
+    return reversed;
+}
 
 
 /**
