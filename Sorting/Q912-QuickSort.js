@@ -7,8 +7,6 @@ var sortArray = function (nums) {
     if (!nums || nums.length < 2) return nums;
 
     quickSort(nums, 0, nums.length - 1);
-
-
     return nums;
 };
 
