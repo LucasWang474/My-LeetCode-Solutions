@@ -13,12 +13,9 @@ var climbStairs = function (n) {
     // 4: 3 + 2 = 5
     // 5: 5 + 3 = 8
 
-    if (n < 4) {
-        return n;
-    }
-
-    let a = 3, b = 5;
-    while (n > 4) {
+    // dp[i] = dp[i + 1] + dp[i + 2]
+    let [a, b] = [1, 1];
+    while (n > 1) {
         [a, b] = [b, a + b];
         n--;
     }

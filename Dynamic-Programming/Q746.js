@@ -39,12 +39,10 @@ var minCostClimbingStairs = function (cost) {
 
 // Iterative, top down with two variables
 var minCostClimbingStairs = function (cost) {
-    const LEN = cost.length;
-
-    let prev = 0, prevPrev = 0, cur = 0;
-    for (let i = LEN - 1; i >= 0; i--) {
-        cur = cost[i] + Math.min(prev, prevPrev);
-        [prev, prevPrev] = [cur, prev];
+    // dp[i] = cost[i] + min(dp[i + 1], dp[i + 2])
+    let [dpi1, dpi2] = [0, 0];
+    for (let i = cost.length - 1; i >= 0; i--) {
+        [dpi1, dpi2] = [dpi2, cost[i] + Math.min(dpi1, dpi2)];
     }
-    return Math.min(prev, prevPrev);
+    return Math.min(dpi1, dpi2);
 };
