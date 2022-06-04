@@ -5,17 +5,13 @@ function printBinary(num) {
     // 这样空间复杂度就是 O(1) 了
     let res = [];
     for (let i = 31; i >= 0; i--) {
-        if (num & (1 << i)) {
-            res.push(1);
-        } else {
-            res.push(0);
-        }
+        res.push((num & (1 << i)) === 0 ? 0 : 1);
     }
     return res.join('');
 }
 
 function bruteForce(num) {
-    let res = num.toString(2);
+    let res = num.toString(2); // 转换为二进制表示
     let zeros = 32 - res.length;
     return '0'.repeat(zeros) + res;
 }
