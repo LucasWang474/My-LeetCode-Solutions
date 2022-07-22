@@ -2,3 +2,6 @@
 **/.vscode
 /Temp
 **/out
+**/bun.lockb
+**/package.json
+**/node_modules
